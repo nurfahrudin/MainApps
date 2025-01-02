@@ -1,0 +1,3 @@
+id,username,password,departemen,bidang,create_date,update_date
+1,admin,pbkdf2_sha256$870000$AEpnNKsE0jre1HwRvbHfDj$uKVX2aYzejCubSjPjYTB0ONSE9pPPo2Kks7OTvMsETM=,Tata Usaha,TU,2025-01-01 13:33:07.877070,
+2,user,pbkdf2_sha256$870000$Tsw3oaIo7PiDuwhuOUl6iW$gOcXI17NO2kdqpyEAI9bPw/sFog2AXuIS+X1cvAx2OM=,BPN Ngada,Tata Usaha,2025-01-01 20:26:10.024883,

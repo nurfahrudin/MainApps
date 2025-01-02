@@ -1,0 +1,114 @@
+{% extends "warkah/index.html" %}
+
+{% load static %}
+
+    {% block title %} <title>Daftar Akun</title> {% endblock title %}
+
+    {% block style %}
+    <style>
+    html,
+    body {
+        height: 100%;
+    }
+
+    body {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    </style>
+    {% endblock style %}
+
+<!-- ============================================================== -->
+<!-- signup form  -->
+<!-- ============================================================== -->
+
+{% block content %}
+
+    <!-- ============================================================== -->
+    <!-- signup form  -->
+    <!-- ============================================================== -->
+<div class="splash-container">
+
+
+
+    {% block message %}
+        {% if messages %}
+            {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <div class="alert alert-success" role="alert" id="success-alert">
+                    <p class="h6">{{ message }}</p>
+            </div>
+        {% elif message.tags == 'warning' %}
+            <div class="alert alert-warning" role="alert" id="warning-alert">
+                    <p class="h6">{{ message }}</p>
+            </div>
+        {% else %}
+            <div class="alert alert-danger" role="alert" id="danger-alert">
+                    <p class="h6">{{ message }}</p>
+            </div>
+        {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endblock message %}
+
+
+
+    <form class="splash-container" method="post">
+        {% csrf_token %}
+        <div class="card">
+            <div class="card-header">
+                <h3 class="mb-1">Form Pendaftaran</h3>
+                <p>Isikan semua data yang dibutuhkan.</p>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="text-md-right">Username</label>
+                    <input class="form-control form-control-lg" type="text" name="username" oninvalid="this.setCustomValidity('Username harus terisi.')" required="" oninput="setCustomValidity('')" autocomplete="off" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label class="text-md-right">Departemen</label>
+                    <input class="form-control form-control-lg" type="text" name="departemen" oninvalid="this.setCustomValidity('Departemen harus terisi.')" required="" oninput="setCustomValidity('')" autocomplete="off" placeholder="Departemen">
+                </div>
+                <div class="form-group">
+                    <label class="text-md-right">Bidang</label>
+                    <input class="form-control form-control-lg" type="text" name="bidang" oninvalid="this.setCustomValidity('Bidang harus terisi.')" required="" oninput="setCustomValidity('')" autocomplete="off" placeholder="Bidang">
+                </div>
+                <div class="form-group">
+                    <label class="text-md-right">Password</label>
+                    <input class="form-control form-control-lg" name="password" type="password" oninvalid="this.setCustomValidity('Password harus terisi.')" required="" oninput="setCustomValidity('')" placeholder="Password">
+                </div>
+                <div class="form-group pt-2">
+                    <button class="btn btn-block btn-primary" type="submit">Daftar Akun</button>
+                </div>
+                
+            </div>
+            <div class="card-footer bg-white">
+                <p>Sudah punya akun? <a href="{% url 'login' %}" class="text-secondary">Login!</a></p>
+            </div>
+        </div>
+    </form>
+
+</div>
+{% endblock content %}
+
+{% block footer %}
+{% endblock footer %}
+
+
+{% block scripts %}
+    <script type="text/javascript">
+   
+        $("#success-alert, #warning-alert, #danger-alert").fadeTo(2000, 500).slideUp(500, function() {
+            $("#success-alert, #warning-alert, #danger-alert").slideUp(1500);
+        });
+
+    </script>
+{% endblock scripts %}
+
+
+{% block combo_script %}
+{% endblock combo_script %}

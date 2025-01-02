@@ -1,0 +1,262 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+  	<head>
+
+		<link rel="icon" href="{% static 'siwarkah/images/avatar-1.png' %}" type="image/x-icon">
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="{% static 'siwarkah/vendor/bootstrap/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'siwarkah/vendor/fonts/circular-std/style.css' %}">
+		<link rel="stylesheet" href="{% static 'siwarkah/libs/css/style.css' %}">
+		<link rel="stylesheet" href="{% static 'siwarkah/vendor/fonts/fontawesome/css/fontawesome-all.css' %}">
+		<link rel="stylesheet" href="{% static 'siwarkah/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css' %}">
+		<link rel="stylesheet" href="{% static 'siwarkah/vendor/fonts/flag-icon-css/flag-icon.min.css' %}">
+
+
+		<!-- CHART JS -->
+	    <script src="{% static 'siwarkah/chart/Chart.min.js' %}" type="text/javascript" charset="utf-8" async defer></script>
+	    <style src="{% static 'siwarkah/chart/Chart.min.css' %}" type="text/css" media="screen"></style>
+
+
+		{% block title %} <title> Home </title> {% endblock title %}
+		
+		{% block style %}
+		{% endblock style %}
+  
+  	</head>
+
+  	<body>
+
+	{% block content %}
+	<div class="dashboard-main-wrapper">
+		<!-- ============================================================== -->
+		<!-- navbar -->
+		<!-- ============================================================== -->
+		<div class="dashboard-header">
+			<nav class="navbar navbar-expand-lg bg-white fixed-top">
+				<a class="navbar-brand" href="{% url 'index_mysite' %}">Aplikasi Sistem Informasi ATR/BPN</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse " id="navbarSupportedContent">
+					<ul class="navbar-nav ml-auto navbar-right-top">
+						<li class="nav-item">
+							<a class="nav-link" >
+							<i class="calendar alternate icon"></i>
+								{{ tgl }}
+							</a>
+						</li>
+
+						{% if request.session.user %}
+							<li class="nav-item dropdown nav-user">
+								<a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<img src="{% static 'siwarkah/images/avatar-1.png' %}" alt="" class="user-avatar-md rounded-circle">
+								</a>
+								<div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
+									<div class="nav-user-info">
+										<h5 class="mb-1 text-white nav-user-name">Halo selamat {{ request.session.say }}, {{ request.session.user }} dari {{ request.session.dept }} </h5>
+									</div>
+									<a class="dropdown-item" href="{% url 'akun' %}"><i class="user icon"></i>User Akun</a>
+									<a class="dropdown-item" href="{% url 'logout' %}"><i class="sign out alternate icon"></i>Keluar</a>
+								</div>
+							</li>
+						{% else %}
+							<li class="nav-item">
+								<a class="nav-link nav-icons" href="{% url 'login' %}" alt="Login">
+									<i class="fas fa-sign-in-alt fa-fw"></i>
+									<span class="indicator"></span>
+									Log In
+								</a>
+							</li>
+						{% endif %}
+
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<!-- ============================================================== -->
+		<!-- end navbar -->
+		<!-- ============================================================== -->
+
+
+
+		<div class="dashboard-ecommerce">
+			<div class="container-fluid dashboard-content ">
+
+				{% block page_header %}
+				<!-- ============================================================== -->
+				<!-- page header  -->
+				<!-- ============================================================== -->
+				<div class="row">
+					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+						<div class="page-header">
+							<h2 class="pageheader-title">Aplikasi Sistem Informasi Kantor Pertanahan Kabupaten Ngada</h2>
+							<div class="page-breadcrumb">
+								<nav aria-label="breadcrumb">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item active" aria-current="page">Kantor Pertanahan Kabupaten Ngada Nusa Tenggara Timur.</li>
+									</ol>
+								</nav>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ============================================================== -->
+				<!-- end page header  -->
+				<!-- ============================================================== -->
+				{% endblock page_header %}
+
+
+
+			    {% block message %}
+					{% if messages %}
+					<div class="alert alert-success" role="alert" id="success-alert">
+					    {% for message in messages %}
+					  		<p class="h6">{{ message }}</p>
+					    {% endfor %}
+					</div>
+					{% endif %}
+			    {% endblock message %}
+
+
+
+				{% block form %}
+				<div class="ecommerce-widget">
+					<div class="row">
+						<div class="col-xl-3"></div>
+
+						<div class="col-xl-3">
+							<div class="card">
+								<div class="card-header bg-primary text-center p-3 ">
+									<h1 class="mb-0 text-white"> SI - WARKAH </h1>
+								</div>
+								<div class="card-body text-center">
+									<h3 class="mb-1">Sistem Informasi Warkah</h3>
+								</div>
+								<div class="card-body border-top">
+									<ul class="list-unstyled bullet-check font-14">
+										<li>Pengarsipan warkah secara digital</li>
+										<li>Memudahkan dan mempercepat pencarian warkah</li>
+										<li>Mengurangi pemakaian album dan tempat penyimpanan</li>
+									</ul>
+									<a href="/siwarkah" class="btn btn-outline-success btn-block btn-lg">Masuk Aplikasi</a>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-xl-3">
+							<div class="card">
+								<div class="card-header bg-primary text-center p-3 ">
+									<h1 class="mb-0 text-white"> SI - PEKAT </h1>
+								</div>
+								<div class="card-body text-center">
+									<h3 class="mb-1">Sistem Informasi Pengambilan Sertifikat</h3>
+								</div>
+								<div class="card-body border-top">
+									<ul class="list-unstyled bullet-check font-14">
+										<li>Pendataan pengambil sertifikat yang terkomputerisasi</li>
+										<li>Membantu pencarian sertifikat yang akan di ambil</li>
+										<li>Memudahkan mencari identitas pengambil sertifikat</li>
+									</ul>
+									<a href="/sipekat" class="btn btn-outline-success btn-block btn-lg">Masuk Aplikasi</a>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-xl-3"></div>
+
+					</div>
+				</div>
+				{% endblock form %}
+
+
+
+
+		</div>
+	</div>
+	{% endblock content %}
+
+
+	</body>
+
+
+	{% block footer %}
+	<!-- ============================================================== -->
+	<!-- footer -->
+	<!-- ============================================================== -->
+	<div class="footer" >
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+						Copyright © <script> document.write(new Date().getFullYear()) </script> | SI - WARKAH | SI - PEKAT
+				</div>
+				<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+					<div class="text-md-right footer-links d-none d-sm-block">
+						<a href="javascript: void(0);">About</a>
+						<a href="javascript: void(0);">Support</a>
+						<a href="javascript: void(0);">Contact Us</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ============================================================== -->
+	<!-- end footer -->
+	<!-- ============================================================== -->
+	{% endblock footer %}
+	  
+
+
+	<!-- Optional JavaScript -->
+	<!-- jquery 3.3.1 -->
+	<script src="{% static 'siwarkah/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+	<!-- bootstap bundle js -->
+	<script src="{% static 'siwarkah/vendor/bootstrap/js/bootstrap.bundle.js' %}"></script>
+	<!-- slimscroll js -->
+	<script src="{% static 'siwarkah/vendor/slimscroll/jquery.slimscroll.js' %}"></script>
+	<!-- main js -->
+	<script src="{% static 'siwarkah/libs/js/main-js.js' %}"></script>
+
+
+
+
+	<!-- ============================================================== -->
+					<!-- DATATABLE SCRIPT & CSS START -->
+	<!-- ============================================================== -->
+
+	<!-- jquery 3.3.1 js -->
+	<script src="{% static 'siwarkah/datatables/js/jquery-3.3.1.js' %}"></script>
+	<!-- jquery.dataTables.min js -->
+	<script src="{% static 'siwarkah/datatables/js/jquery.dataTables.min.js' %}"></script>
+	<!-- dataTables.semanticui.min js -->
+	<script src="{% static 'siwarkah/datatables/js/semantic.min.js' %}"></script>
+	<!-- semantic.min js -->
+	<script src="{% static 'siwarkah/datatables/js/dataTables.semanticui.min.js' %}"></script>
+	<!-- datatables.select.min js -->
+	<script src="{% static 'siwarkah/datatables/js/dataTables.select.min.js' %}"></script>
+
+	<!-- style semantic ui css -->
+	<link rel="stylesheet" href="{% static 'siwarkah/datatables/css/semantic.min.css' %}">
+	<link rel="stylesheet" href="{% static 'siwarkah/datatables/css/dataTables.semanticui.min.css' %}">
+	<link rel="stylesheet" href="{% static 'siwarkah/datatables/css/select.semanticui.min.css' %}">
+
+	<!-- ============================================================== -->
+					<!-- DATATABLE SCRIPT & CSS END -->
+	<!-- ============================================================== -->
+
+
+	{% block scripts %}
+	<script type="text/javascript">
+		$("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
+	      	$("#success-alert").slideUp(1500);
+	    });
+	</script>
+	{% endblock scripts %}
+
+</html>

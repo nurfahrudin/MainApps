@@ -1,0 +1,166 @@
+{% extends "mainapp/index.html" %}
+
+{% load static %}
+
+	{% block title %} <title>Profile Akun</title> {% endblock title %}
+
+
+    {% block page_header %}
+    <!-- ============================================================== -->
+    <!-- pageheader  -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="page-header">
+                <h2 class="pageheader-title">Informasi akun pengguna aplikasi</h2>
+                <div class="page-breadcrumb">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'index_mysite' %}" class="breadcrumb-link">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page" style="text-transform: capitalize;">Akun {{ request.session.user }}</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end pageheader  -->
+    <!-- ============================================================== -->
+    {% endblock page_header %}
+
+
+
+
+    {% block message %}
+        {% if messages %}
+            {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <div class="alert alert-success" role="alert" id="success-alert">
+                    <p class="h6">{{ message }}</p>
+            </div>
+        {% elif message.tags == 'warning' %}
+            <div class="alert alert-warning" role="alert" id="warning-alert">
+                    <p class="h6">{{ message }}</p>
+            </div>
+        {% else %}
+            <div class="alert alert-danger" role="alert" id="danger-alert">
+                    <p class="h6">{{ message }}</p>
+            </div>
+        {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endblock message %}
+
+
+
+
+    {% block form %}
+    <div class="ecommerce-widget">
+
+        <div class="row">
+
+            <div class="col-xl-5">
+
+                <div class="card">
+                    <h5 class="card-header"> <i class="fas fa-address-card"></i> &nbsp; PROFILE </h5>
+                    <div class="card-body">
+                        <div class="user-avatar text-center d-block">
+                            <img src="{% static 'siwarkah/images/avatar-1.png' %}" alt="User Avatar" class="rounded-circle user-avatar-xxl">
+                        </div>
+                        <div class="text-center">
+                            <h2 class="font-24 mb-0" style="text-transform: uppercase;">{{ request.session.user }}</h2>
+                            <p style="text-transform: capitalize;">{{ request.session.dept }}</p>
+                        </div>
+                    </div>
+                    <div class="card-body border-top">
+                        <h3 class="font-15">Detail Informasi</h3>
+                        <ul class="list-unstyled mb-0">
+                            <!-- <div class="row"> -->
+                                <li class="mb-2" style="text-transform: capitalize;"><i class="fas fa-building mr-2"></i>{{ request.session.dept }}</li>
+                                <li class="mb-0" style="text-transform: capitalize;"><i class="fas fa-university mr-2"></i>{{ request.session.bid }}</li>
+                            <!-- </div> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================== -->
+                                    <!-- START PROFILE ACCOUNT  -->
+            <!-- ============================================================== -->
+            <div class="col-xl-7">
+                <div class="card">
+                    <h5 class="card-header"> <i class="fas fa-cog"></i> &nbsp; EDIT DATA AKUN </h5>
+                    <div class="card-body">
+
+                    <form id="form_akun" method="post">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <label class="col-12 col-lg-3 col-form-label text-lg-right" style="color: #000"><b>Username</b></label>
+                            <div class="col-12 col-lg-6 col-lg-6">
+                                <div class="ui fluid input">
+                                    <input class="form-control" type="text" name="username" value="{{ request.session.user }}" autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-12 col-lg-3 col-form-label text-lg-right" style="color: #000"><b>Departemen</b></label>
+                            <div class="col-12 col-lg-6 col-lg-6">
+                                <div class="ui fluid input">
+                                    <input class="form-control" type="text" name="departemen" value="{{ request.session.dept }}" autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-12 col-lg-3 col-form-label text-lg-right" style="color: #000"><b>Bidang</b></label>
+                            <div class="col-12 col-lg-6 col-lg-6">
+                                <div class="ui fluid input">
+                                    <input class="form-control" type="text" name="bidang" value="{{ request.session.bid }}" autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-12 col-lg-3 col-form-label text-lg-right" style="color: #000"><b>Password</b></label>
+                            <div class="col-12 col-lg-6 col-lg-6">
+                                <div class="ui fluid input">
+                                    <input class="form-control" name="pass" oninvalid="this.setCustomValidity('Masukkan password lama untuk menyimpan perubahan.')" required="" oninput="setCustomValidity('')" type="password" placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row text-right">
+                            <div class="col col-sm-10 col-lg-9 offset-sm-1 offset-lg-0">
+                                <button class="ui blue button" type="submit"><i class="fas fa-check"></i> Update </button>
+                                <a class="ui yellow button" aria-controls="example" type="button" href="{% url 'index_mysite' %}"><i class="fas fa-times"></i> Batal </a>
+                            </div>
+                        </div>
+                    </form>
+
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+                                    <!-- END EDIT ACCOUNT  -->
+            <!-- ============================================================== -->
+
+        </div>
+    {% endblock form %}
+
+
+
+    {% block scripts %}
+    <script type="text/javascript">
+
+        $("#success-alert, #warning-alert, #danger-alert").fadeTo(2000, 500).slideUp(500, function() {
+            $("#success-alert, #warning-alert, #danger-alert").slideUp(1500);
+        });
+
+    </script>
+    {% endblock scripts %}
+
+
+    {% block combo_script %}
+    {% endblock combo_script %}
