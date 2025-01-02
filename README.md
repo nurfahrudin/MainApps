@@ -21,7 +21,9 @@ Merupakan file project kumpulan aplikasi inovasi ATR/BPN Ngada
 # SETUP PROJECT
 *******************************************
 -  Install Python (versi 3.12)
+-  Buat direktori/folder project
 -  Setup Virtual Environment 'python -m venv env'
+-  Aktifkan Virtual Environment 'venv\Scripts\activate'
 -  Install Framework Django (versi 5.1)
 -  Buat Project Django baru dengan nama 'MainApps'
 -  Git clone repositori 'MainApps'
